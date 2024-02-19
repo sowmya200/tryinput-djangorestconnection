@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Input Form</title>
+</head>
+<body>
+    <form id="userInputForm">
+        <label for="userInput">User Input:</label>
+        <input type="text" id="userInput" name="userInput" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('userInputForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userInput = document.getElementById('userInput').value;
+            
+            // Send the user input to your DRF backend
+            fetch('http://127.0.0.1:8000/api/user-input/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_input: userInput }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success (optional)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error (optional)
+            });
+        });
+    </script>
+</body>
+</html>
