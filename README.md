@@ -1,0 +1,2 @@
+# tryinput-djangorestconnection
+basic connections
